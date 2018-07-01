@@ -1,6 +1,7 @@
 import React from "react";
-import { Button, Form, Input } from 'reactstrap';
+import { Button, Form, Input, Card } from 'reactstrap';
 import './AddressForm.css';
+import HomeValueCard from './HomeValueCard';
 
 class AddressForm extends React.Component {
     constructor(props) {
@@ -9,28 +10,29 @@ class AddressForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleClearForm = this.handleClearForm.bind(this);
         this.state = {
-            visitorAddress: '',
+            addressInput: '',
+            addressSubmit: '',
             clearForm: false
         };
     }
 
     handleAddressChange(e) {
         this.setState({
-            visitorAddress: e.target.value
+            addressInput: e.target.value
         });
     }
 
     handleSubmit(e) {
         e.preventDefault();
-        alert("Address: " + this.state.visitorAddress);
         this.setState((prevState) => ({
+            addressSubmit: this.state.addressInput,
             clearForm: !prevState.clearForm
         }));
     }
 
     handleClearForm() {
         this.setState((prevState) => ({
-            visitorAddress: '',
+            addressInput: '',
             clearForm: !prevState.clearForm
         }));
     }
@@ -43,23 +45,24 @@ class AddressForm extends React.Component {
                                       onClick={this.handleClearForm} >Clear</Button>;
         }
 
+        let homeValueCard;
+        if (this.state.addressSubmit !== '') homeValueCard = <HomeValueCard address={this.state.addressSubmit}/>;
+
         return (
-            <Form onSubmit={this.handleSubmit} className="form-style">
-                <div className="form-group row">
-                    <div className="col-4">
+            <div>
+                <Card body outline color="primary" className="card-style">
+                    <Form inline onSubmit={this.handleSubmit} className="form-style">
                         <Input type="text" name="visitorAddress"
                                placeholder="Enter Address" bsSize="lg"
-                               value={this.state.visitorAddress} onChange={this.handleAddressChange}
+                               value={this.state.addressInput} onChange={this.handleAddressChange}
+                               className="mb-2 mr-sm-3 mb-sm-0"
                                required />
-                    </div>
-                    <div className="col-.5">
                         <Button color="success" size="lg" className="mb-2 mr-sm-2 mb-sm-0">Search</Button>
-                    </div>
-                    <div className="col-.5">
                         {clearFormButton}
-                    </div>
-                </div>
-            </Form>
+                    </Form>
+                </Card>
+                {homeValueCard}
+            </div>
         );
     }
 }
