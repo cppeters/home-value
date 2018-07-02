@@ -18,6 +18,9 @@
 .env.test.local
 .env.production.local
 
+# api key
+.env
+
 package-lock.json
 
 npm-debug.log*
