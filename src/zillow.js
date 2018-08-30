@@ -1,8 +1,8 @@
 import { xml2json } from 'xml-js';
 
 export default function callZillow(addressObj) {
-    const address = addressObj.address;
-    const cityState = addressObj.cityState;
+    const addressFromHomeVal = addressObj.address;
+    const cityStateFromHomeVal = addressObj.cityState;
 
     let zillowResponse = {
         address: '',
@@ -13,7 +13,7 @@ export default function callZillow(addressObj) {
         zestimate: ''
     };
 
-    const zillowURL = `http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=X1-ZWz18e52ev79xn_1d5w6&address=${address}&citystatezip=${cityState}`;
+    const zillowURL = `http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=${process.env.REACT_APP_ZILLOW_API_KEY}&address=${addressFromHomeVal}&citystatezip=${cityStateFromHomeVal}`;
 
     return fetch(zillowURL)
         .then((result) => {
@@ -22,7 +22,7 @@ export default function callZillow(addressObj) {
             const jsonString = xml2json(jsonResult.toString(), {compact: true, spaces: 4});
             const obj = JSON.parse(jsonString);
 
-            if (obj["SearchResults:searchresults"]["response"] !== null) {
+            if (obj["SearchResults:searchresults"]["response"]) {
                 zillowResponse.address = obj["SearchResults:searchresults"]["response"]["results"]["result"]["address"];
                 zillowResponse.bathrooms = obj["SearchResults:searchresults"]["response"]["results"]["result"]["bathrooms"];
                 zillowResponse.bedrooms = obj["SearchResults:searchresults"]["response"]["results"]["result"]["bedrooms"];

@@ -96,13 +96,21 @@ function parseAddressString(addressString) {
     let indexOfFirstDigit = addressString.indexOf(addressString.match(/\d/));
     addressString = addressString.substring(indexOfFirstDigit);
     let addressCityStateZip = addressString.split(',');
-    const address = addressCityStateZip[0];
-    const city = addressCityStateZip[1].trim();
-    const state = addressCityStateZip[2].trim();
-    return {
-        address: address.replace(/\s/g, "+"),
-        cityState: `${city},${state}`
-    };
+    if (addressCityStateZip.length > 2) {
+        const address = addressCityStateZip[0];
+        const city = addressCityStateZip[1].trim();
+        const state = addressCityStateZip[2].trim();
+        return {
+            address: address.replace(/\s/g, "+"),
+            cityState: `${city},${state}`
+        };
+    }
+    else {
+        return {
+            address: '',
+            cityState: ''
+        };
+    }
 }
 
 export default HomeValueCard;
