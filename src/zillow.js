@@ -13,7 +13,8 @@ export default function callZillow(addressObj) {
         zestimate: ''
     };
 
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/',
+    // Personal Heroku instance of cors-anywhere.herokuapp.com
+    const proxyUrl = 'https://peaceful-gorge-67298.herokuapp.com/',
           zillowURL = `https://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=${process.env.REACT_APP_ZILLOW_API_KEY}&address=${addressFromHomeVal}&citystatezip=${cityStateFromHomeVal}`;
 
     return fetch(proxyUrl + zillowURL)
