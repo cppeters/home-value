@@ -13,9 +13,10 @@ export default function callZillow(addressObj) {
         zestimate: ''
     };
 
-    const zillowURL = `https://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=${process.env.REACT_APP_ZILLOW_API_KEY}&address=${addressFromHomeVal}&citystatezip=${cityStateFromHomeVal}`;
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/',
+          zillowURL = `https://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=${process.env.REACT_APP_ZILLOW_API_KEY}&address=${addressFromHomeVal}&citystatezip=${cityStateFromHomeVal}`;
 
-    return fetch(zillowURL)
+    return fetch(proxyUrl + zillowURL)
         .then((result) => {
             return result.text();
         }).then((jsonResult) => {
