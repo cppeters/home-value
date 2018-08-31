@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Form, Input, Card } from 'reactstrap';
 import './AddressForm.css';
 import HomeValueCard from './HomeValueCard';
+import AutoComplete from "./AutoComplete";
 
 class AddressForm extends React.Component {
     constructor(props) {
@@ -52,6 +53,7 @@ class AddressForm extends React.Component {
             <div>
                 <Card body outline color="primary" className="card-style">
                     <Form inline onSubmit={this.handleSubmit} className="form-style">
+                        <AutoComplete />
                         <Input type="text" name="visitorAddress"
                                placeholder="Enter Address" bsSize="lg"
                                value={this.state.addressInput} onChange={this.handleAddressChange}
