@@ -52,6 +52,7 @@ class HomeValueCard extends React.Component {
         }
         else {
             this.setState(() => ({
+                zillowResponse: Object.assign({}, {}),
                 notFound: true
             }));
         }

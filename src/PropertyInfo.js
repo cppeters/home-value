@@ -13,7 +13,7 @@ class PropertyInfo extends React.Component {
         if (zillowResponse.finishedSqFt) finishedSqFt = zillowResponse.finishedSqFt._text;
         if (zillowResponse.bathrooms) bathrooms = zillowResponse.bathrooms._text;
         if (zillowResponse.bedrooms) bedrooms = zillowResponse.bedrooms._text;
-        if (zillowResponse.zestimate) zestimate = zillowResponse.zestimate.amount._text;
+        if (zillowResponse.zestimate && zillowResponse.zestimate.amount._text !== undefined) zestimate = zillowResponse.zestimate.amount._text;
 
         return(
             <Card body inverse style={{ backgroundColor: '#333', borderColor: '#333' }}>

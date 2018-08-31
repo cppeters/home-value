@@ -3,8 +3,8 @@ import { Card, CardImg, CardBody, CardTitle, CardText } from 'reactstrap';
 
 class StreetView extends React.Component {
     render() {
-        const height = '600';
-        const width = '300';
+        const height = '800';
+        const width = '400';
         const size = height + 'x' + width;
         const google = `https://maps.googleapis.com/maps/api/streetview?size=${size}&location=${this.props.address}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`;
 
